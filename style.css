@@ -140,19 +140,6 @@ button:hover{
   box-shadow:0 0 20px #6a00ff;
 }
 
-
-.cursor{
-  width:200px;
-  height:200px;
-  border-radius:50%;
-  position:fixed;
-  pointer-events:none;
-  background:radial-gradient(circle,rgba(106,0,255,.3),transparent 70%);
-  transform:translate(-50%,-50%);
-  mix-blend-mode:screen;
-  z-index:-1;
-}
-
 .smp-tile{
   display:flex;
   flex-direction:column;
