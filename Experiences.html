@@ -5,178 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Experiences | Xynox Studios</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-body{
-  margin:0;
-  padding:0;
-  background:#050505;
-  font-family:'Orbitron', sans-serif;
-  color:white;
-  overflow-x:hidden;
-}
-
-#particles{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
-  pointer-events:none;
-}
-
-/* Navigation */
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 50px;
-  z-index:10;
-}
-nav h2{
-  color:white;
-}
-nav ul{
-  list-style:none;
-  display:flex;
-  gap:25px;
-}
-nav ul li a{
-  color:white;
-  text-decoration:none;
-  transition:.3s;
-}
-nav ul li a:hover{
-  color:#ff007f;
-}
-
-/* Hero fixed above content */
-.hero{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:150px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  pointer-events:none;
-  z-index:5;
-}
-.hero h1{
-  font-size:3rem;
-  background:linear-gradient(90deg,#ff007f,#00d4ff,#ff007f);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:gradientMove 6s linear infinite;
-  background-size:300%;
-  margin:0;
-}
-.hero p{
-  font-size:1rem;
-  opacity:.7;
-  margin:0;
-}
-
-/* Push content below hero */
-.section{
-  margin-top:160px;
-  padding:50px;
-}
-
-/* Grid layout */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:40px;
-  max-width:1200px;
-  margin:0 auto;
-}
-
-/* Glass Cards */
-.card{
-  background:rgba(255,255,255,.05);
-  backdrop-filter:blur(20px);
-  border-radius:20px;
-  padding:30px;
-  text-align:center;
-  box-shadow:0 30px 80px rgba(0,0,0,.5);
-  cursor:pointer;
-  transition:.3s;
-  position:relative;
-}
-.card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 40px 100px rgba(255,0,127,.6),0 40px 100px rgba(0,212,255,.4);
-}
-
-/* SMP Portal */
-.smp-portal{
-  border:2px solid #ff007f;
-  overflow:hidden;
-}
-.smp-portal .smp-image{
-  width:100%;
-  border-radius:15px;
-  margin-bottom:20px;
-  overflow:hidden;
-}
-.smp-portal .smp-image img{
-  width:100%;
-  height:auto;
-  transition: transform .3s;
-}
-.smp-portal:hover .smp-image img{
-  transform: scale(1.05);
-}
-/* Nether portal animation */
-.smp-portal.enter-portal::after{
-  content:"";
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: radial-gradient(circle, rgba(255,0,127,0.5) 0%, rgba(0,212,255,0.2) 100%);
-  animation:portalOpen 1s forwards;
-  z-index:5;
-}
-@keyframes portalOpen{
-  0% { transform: scale(0); opacity:1; }
-  100% { transform: scale(3); opacity:0; }
-}
-
-/* Keyframes gradient */
-@keyframes gradientMove{
-  0%{background-position:0%}
-  100%{background-position:300%}
-}
-
-/* Responsive */
-@media(max-width:768px){
-  .hero h1{font-size:2.2rem;}
-  .hero p{font-size:.9rem;}
-  nav{padding:15px 20px;}
-  .grid{grid-template-columns:1fr; gap:30px;}
-  .section{padding:30px 20px;}
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <canvas id="particles"></canvas>
+<div class="progress"></div>
 
-<!-- Hero -->
-<section class="hero">
-  <h1>Our Experiences</h1>
-  <p>Step into our ultra cinematic worlds and adventures</p>
-</section>
-
-<!-- Navigation -->
 <nav>
   <h2>Xynox Studios</h2>
   <ul>
@@ -188,9 +23,14 @@ nav ul li a:hover{
   </ul>
 </nav>
 
-<!-- Experiences Section -->
+<section class="hero">
+  <h1>Our Experiences</h1>
+  <p>Step into our ultra cinematic worlds</p>
+</section>
+
 <section class="section">
   <div class="grid">
+
     <div class="card">
       <h3>Creative Worlds</h3>
       <p>Immersive custom-built environments with cinematic design.</p>
@@ -206,66 +46,26 @@ nav ul li a:hover{
       <p>Explore our latest builds and cinematic experiences.</p>
     </div>
 
-    <div class="card smp-portal">
+    <!-- SMP Block with Nether portal animation -->
+    <div class="card smp-portal" id="smpPortal">
       <div class="smp-image">
-        <img src="https://raw.githubusercontent.com/ikstokie1/ikstokie1.github.io/refs/heads/main/files/xynox%20studios/Designer.png" alt="INSANESMP">
+        <img src="https://via.placeholder.com/600x300.png?text=INSANESMP" alt="INSANESMP">
       </div>
       <h3>INSANESMP</h3>
-      <p>Click to step through the Nether portal and join the SMP!</p>
+      <p>Click to step through the Nether portal!</p>
     </div>
+
   </div>
 </section>
 
+<script src="script.js"></script>
 <script>
-// Full-page particles
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas(){
-  canvas.width = window.innerWidth;
-  canvas.height = document.body.scrollHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-let particles = [];
-for(let i=0;i<150;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    size:Math.random()*2+1,
-    speedX:(Math.random()-0.5)*0.3,
-    speedY:(Math.random()-0.5)*0.3,
-    opacity:Math.random()
-  });
-}
-
-function animateParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.x += p.speedX;
-    p.y += p.speedY;
-    if(p.x<0) p.x=canvas.width;
-    if(p.x>canvas.width) p.x=0;
-    if(p.y<0) p.y=canvas.height;
-    if(p.y>canvas.height) p.y=0;
-    ctx.fillStyle = `rgba(255,0,127,${p.opacity})`;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fill();
-  });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-
-// SMP Portal click animation + redirect
-document.querySelector(".smp-portal").addEventListener("click", e=>{
-  const block = e.currentTarget;
-  block.classList.add("enter-portal");
-  setTimeout(()=>{
-    window.location.href = "https://insanesmp.xynoxstudios.com";
-  },1000);
+const smpPortal = document.getElementById("smpPortal");
+smpPortal.addEventListener("click", ()=>{
+  smpPortal.classList.add("enter-portal");
+  setTimeout(()=>{ window.location.href="https://insanesmp.xynoxstudios.com"; },1000);
 });
 </script>
+
 </body>
 </html>
