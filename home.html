@@ -3,27 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home | Xynox Studios</title>
+<title>Home | XYNOX Studios</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 <style>
+/* Basic Reset */
+body{
+  margin:0;
+  padding:0;
+  background:#050505;
+  font-family:'Orbitron', sans-serif;
+  color:white;
+  overflow-x:hidden;
+}
 
-
-.hero{
-  position:fixed; 
+/* Particles */
+#particles{
+  position:fixed;
   top:0;
   left:0;
   width:100%;
-  height:150px;
+  height:100%;
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* Navigation */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 50px;
+  z-index:10;
+}
+nav h2{ color:white; }
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:25px;
+}
+nav ul li a{
+  color:white;
+  text-decoration:none;
+  transition:.3s;
+}
+nav ul li a:hover{ color:#ff007f; }
+
+/* Hero (scrolls with page) */
+.hero{
+  position:relative;
+  width:100%;
+  height:180px;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  pointer-events:none; 
-  z-index:10; 
+  margin-top:70px; /* ruimte onder nav */
 }
-
 .hero h1{
   font-size:3rem;
   background:linear-gradient(90deg,#ff007f,#00d4ff,#ff007f);
@@ -33,24 +73,18 @@
   background-size:300%;
   margin:0;
 }
-
 .hero p{
   font-size:1rem;
   opacity:.7;
   margin:0;
 }
 
-
-body > section, body > .grid, .dynamic-block{
-  margin-top:160px; 
-}
-
-
+/* Dynamic Release Block */
 .dynamic-block{
   width:80%;
   max-width:800px;
   height:300px;
-  margin:0 auto 60px auto;
+  margin:60px auto;
   position:relative;
   border-radius:20px;
   overflow:hidden;
@@ -64,12 +98,10 @@ body > section, body > .grid, .dynamic-block{
   transition:.3s;
   box-shadow:0 30px 80px rgba(0,0,0,.5);
 }
-
 .dynamic-block:hover{
   transform:translateY(-10px) scale(1.02);
   box-shadow:0 40px 100px rgba(255,0,127,.6),0 40px 100px rgba(0,212,255,.4);
 }
-
 .dynamic-block img{
   width:100%;
   height:100%;
@@ -80,7 +112,6 @@ body > section, body > .grid, .dynamic-block{
   z-index:0;
   transition:opacity .5s;
 }
-
 .dynamic-block h2, .dynamic-block p{
   position:relative;
   z-index:2;
@@ -89,17 +120,17 @@ body > section, body > .grid, .dynamic-block{
   margin:0;
 }
 
-
+/* Grid layout */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:40px;
   width:100%;
   max-width:1200px;
-  margin:0 auto 80px auto;
+  margin:40px auto 80px auto;
 }
 
-
+/* Glass Cards */
 .card{
   background:rgba(255,255,255,.05);
   backdrop-filter:blur(20px);
@@ -112,44 +143,48 @@ body > section, body > .grid, .dynamic-block{
   cursor:pointer;
   position:relative;
 }
-
 .card:hover{
   transform:translateY(-10px) scale(1.02);
   box-shadow:0 40px 100px rgba(255,0,127,.6),0 40px 100px rgba(0,212,255,.4);
 }
 
-
+/* SMP Tile */
 .smp-tile{
   border:2px solid #ff007f;
 }
-
 .smp-tile .smp-image{
   width:100%;
   border-radius:15px;
   overflow:hidden;
   margin-bottom:20px;
 }
-
 .smp-tile .smp-image img{
   width:100%;
   height:auto;
   display:block;
   transition: transform .3s;
 }
-
 .smp-tile:hover .smp-image img{
   transform: scale(1.05);
 }
 
+/* Gradient animation */
+@keyframes gradientMove{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
 
+/* Responsive */
 @media (max-width:768px){
-  .hero h1{ font-size:3rem; }
-  .dynamic-block{ height:250px; }
-  .grid{ grid-template-columns:1fr; gap:30px; }
+  nav{padding:15px 20px;}
+  .hero h1{font-size:2.2rem;}
+  .dynamic-block{height:250px;}
+  .grid{grid-template-columns:1fr; gap:30px;}
 }
 </style>
 </head>
 <body>
+
 <canvas id="particles"></canvas>
 
 <nav>
@@ -163,54 +198,48 @@ body > section, body > .grid, .dynamic-block{
   </ul>
 </nav>
 
-
 <section class="hero">
   <h1>XYNOX STUDIOS</h1>
   <p>ULTRA CINEMATIC DIGITAL EXPERIENCES</p>
 </section>
 
-
 <section class="dynamic-block" id="dynamicRelease">
-  <img src="https://github.com/ikstokie1/ikstokie1.github.io/blob/main/files/xynox%20studios/Designer.png?raw=true" alt="Release Image">
+  <img src="https://via.placeholder.com/800x300.png?text=InsaneSMP" alt="Release Image">
   <h2>InsaneSMP</h2>
   <p>Join our ultra cinematic SMP universe!</p>
 </section>
 
-
 <section class="section">
   <div class="grid">
-
     <a href="https://insanesmp.xynoxstudios.com" target="_blank" class="card smp-tile">
       <div class="smp-image">
-        <img src="https://github.com/ikstokie1/ikstokie1.github.io/blob/main/files/xynox%20studios/Designer.png?raw=true" alt="INSANESMP">
+        <img src="https://via.placeholder.com/600x300.png?text=INSANESMP" alt="INSANESMP">
       </div>
       <h3>InsaneSMP</h3>
       <p>Join our cinematic SMP universe!</p>
     </a>
-
-  </div>
-</section>
-
-<section class="section">
-  <h2>Latest News</h2>
-  <div class="grid">
     <div class="card">
-      <h3>placeholder</h3>
-      <p>placeholder</p>
+      <h3>Latest Build</h3>
+      <p>Check out our newest cinematic worlds and designs.</p>
     </div>
     <div class="card">
-      <h3>placeholder</h3>
-      <p>placeholder</p>
+      <h3>Community News</h3>
+      <p>Stay updated on events, competitions, and releases.</p>
     </div>
   </div>
 </section>
 
 <script>
-
+// Particles
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = document.body.scrollHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
 let particles = [];
 for(let i=0;i<150;i++){
@@ -241,21 +270,16 @@ function animateParticles(){
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
-window.addEventListener("resize", ()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
 
-
+// Dynamic release block
 const releases = [
   {
-    img:"https://github.com/ikstokie1/ikstokie1.github.io/blob/main/files/xynox%20studios/Designer.png?raw=true",
+    img:"https://via.placeholder.com/800x300.png?text=InsaneSMP",
     title:"InsaneSMP",
     desc:"Step into the Nether portal!",
-    link:"#"
+    link:"https://insanesmp.xynoxstudios.com"
   }
 ];
-
 const dynamicBlock = document.getElementById("dynamicRelease");
 let current = 0;
 
@@ -264,35 +288,31 @@ function updateRelease(){
   const img = dynamicBlock.querySelector("img");
   const h2 = dynamicBlock.querySelector("h2");
   const p = dynamicBlock.querySelector("p");
-
   
-  img.style.opacity = 0;
-  h2.style.opacity = 0;
-  p.style.opacity = 0;
+  img.style.opacity=0;
+  h2.style.opacity=0;
+  p.style.opacity=0;
 
   setTimeout(()=>{
     img.src = release.img;
     h2.textContent = release.title;
     p.textContent = release.desc;
-    
-    img.style.opacity = 1;
-    h2.style.opacity = 1;
-    p.style.opacity = 1;
+    img.style.opacity=1;
+    h2.style.opacity=1;
+    p.style.opacity=1;
   },500);
 
   current = (current+1) % releases.length;
 }
-
-
 setInterval(updateRelease,20000);
 
-
-dynamicBlock.addEventListener("click",()=>{
+dynamicBlock.addEventListener("click", ()=>{
   const release = releases[(current+releases.length-1)%releases.length];
   if(release.link && release.link!=="#"){
     window.location.href = release.link;
   }
 });
 </script>
+
 </body>
 </html>
